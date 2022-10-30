@@ -1,117 +1,63 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import React, {
+  useState
+} from 'react';
 
-import React from 'react';
-import type {Node} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
+  StyleSheet, Text, View, ScrollView
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import Header from './components/header';
 
-/* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
- * LTI update could not be added via codemod */
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
+export default function App() {
+  const [items, setItems] = useState([
+    { title: 'Some Item', id: '1' },
+    { title: 'Bodos First', id: '2' },
+    { title: 'Sunrise Humpback', id: '3' },
+    { title: 'Rotumpkin', id: '4' },
+    { title: 'Paint Beta Bridge', id: '5' },
+    { title: 'Another Item', id: '6' },
+    { title: 'Finish App', id: '7' },
+    { title: 'Do Homework', id: '8' },
+  ]);
+
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View style={styles.container}>
+      <Header />
+      <ScrollView style={styles.list}>
+        {items.map(item => (
+          <View key={item.id}>
+            <Text style={styles.item}>{item.title}</Text>
+          </View>
+        ))}
+      </ScrollView>
+
     </View>
   );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+}
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    backgroundColor: '#fff'
   },
-  sectionTitle: {
+  item: {
+    marginHorizontal: 12,
+    marginTop: 24,
+    padding: 30,
+    backgroundColor: 'orange',
     fontSize: 24,
-    fontWeight: '600',
+    borderRadius: 4
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+  list: {
+    marginHorizontal: 4,
+    marginBottom: 24
+  }
 });
 
-export default App;
+/***************************************************************************************
+*  REFERENCES
+*  Title: React Native Tutorial #6 - Lists & ScrollView
+*  Author: The Net Ninja
+*  Date: Nov 29, 2019
+*  URL: https://www.youtube.com/watch?v=W-pg1r6-T0g
+***************************************************************************************/
