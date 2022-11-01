@@ -2,11 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from './header';
 
-export default function AddItem() {
+const AddItem = ({ navigation, route }) => {
+    const titles = route.params.titles;
+
     return (
       <View style={styles.container}>
         <Header />
-        <Text>{"Add new item"}</Text>
+        <Text>{"Add New Item"}</Text>
+        <Text>{titles}</Text>
       </View>
     );
   }
@@ -16,4 +19,4 @@ export default function AddItem() {
       flex: 1,
       backgroundColor: '#fff'
     }
-  });
+  }); export default AddItem;

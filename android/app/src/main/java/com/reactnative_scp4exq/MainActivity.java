@@ -3,6 +3,7 @@ package com.reactnative_scp4exq;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
+import android.os.Bundle;
 
 public class MainActivity extends ReactActivity {
 
@@ -13,6 +14,12 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "reactnative_scp4exq";
+  }
+
+  // added as part of React Navigation setup
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
   }
 
   /**
