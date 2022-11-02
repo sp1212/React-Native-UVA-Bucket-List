@@ -31,7 +31,7 @@ const EditItem = ({ navigation, route }) => {
       } else if (title.length < 1 || title.length > 30) {
         Alert.alert('Invalid Title', 'Please enter a title between 1 and 30 characters in length.')
       } else {
-        navigation.navigate('BucketList', { actionType: 'edit', title, dateDue: formatDate(dateDue), isDone, dateCompleted });
+        navigation.navigate('BucketList', { actionType: 'edit', title, dateDue: formatDate(dateDue), isDone, dateCompleted, titleOld });
       }
     };
 

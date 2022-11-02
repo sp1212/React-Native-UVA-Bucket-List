@@ -23,9 +23,19 @@ const BucketList = ({ navigation, route }) => {
 
   React.useEffect(() => {
     if (route.params?.actionType) {
-      Alert.alert(route.params.actionType);
-    } else {
-      Alert.alert("No route")
+      if (route.params?.actionType == 'add') {
+        setItems(items.concat([{ title: route.params?.title, isDone: false, dateCompleted: "N/A", dateDue: route.params?.dateDue }]));
+      } else if (route.params?.actionType == 'edit') {
+        setItems(items.map(a => {
+          if (a.title.localeCompare(route.params?.titleOld) === 0) {
+            return { title: route.params?.title, isDone: route.params?.isDone, dateCompleted: route.params?.dateCompleted, dateDue: route.params?.dateDue };
+          }
+          return a;
+        }));
+      } else if (route.params?.actionType == 'delete') {
+        setItems(items.filter(function(a) { return a.title !== route.params?.title }));
+      }
+      navigation.setParams({actionType: null});
     }
   });
 
