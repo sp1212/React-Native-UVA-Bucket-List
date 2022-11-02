@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Button, Alert } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import Header from './header';
 
-const BucketList = ({ navigation }) => {
+const BucketList = ({ navigation, route }) => {
   const [items, setItems] = useState([
     { title: 'Some Item', isDone: true, dateCompleted: "2021-10-12", dateDue: "2022-05-07" },
-    { title: 'Bodos First', isDone: false, dateCompleted: "N/A", dateDue: "2021-12-20" },
+    { title: 'Bodos First', isDone: false, dateCompleted: "N/A", dateDue: "2021-10-31" },
     { title: 'Sunrise Humpback', isDone: true, dateCompleted: "2022-06-05", dateDue: "2022-11-30" },
-    { title: 'Rotumpkin', isDone: true, dateCompleted: "2022-12-02", dateDue: "2024-03-24" },
+    { title: 'Rotumpkin', isDone: true, dateCompleted: "2022-12-02", dateDue: "2024-01-01" },
     { title: 'Paint Beta Bridge', isDone: false, dateCompleted: "N/A", dateDue: "2015-11-09" },
     { title: 'Another Item', isDone: false, dateCompleted: "N/A", dateDue: "2023-05-23" },
     { title: 'Finish App', isDone: false, dateCompleted: "N/A", dateDue: "2022-04-19" },
@@ -20,6 +20,14 @@ const BucketList = ({ navigation }) => {
   }
 
   const addItem = () => navigation.navigate('AddItem', { titles: items.map(a => a.title) });
+
+  React.useEffect(() => {
+    if (route.params?.actionType) {
+      Alert.alert(route.params.actionType);
+    } else {
+      Alert.alert("No route")
+    }
+  });
 
   return (
     <View style={styles.container}>
