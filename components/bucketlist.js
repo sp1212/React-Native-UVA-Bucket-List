@@ -41,7 +41,6 @@ const BucketList = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <Header />
       <ScrollView style={styles.list}>
         {items.filter(item => !item.isDone).sort(
           function (a, b) { return (a.dateDue < b.dateDue) ? -1 : (a > b) ? 1 : 0; }
@@ -49,26 +48,32 @@ const BucketList = ({ navigation, route }) => {
           function (a, b) { return (a.dateCompleted < b.dateCompleted) ? -1 : (a > b) ? 1 : 0; }
         )).map(item => (
           <TouchableOpacity style={styles.item} key={item.title} onPress={() => editItem(item)}>
-            <CheckBox
-              disabled={false}
-              value={item.isDone}
-              onValueChange={(newValue) => 
-                setItems(items.map(a => {
-                  if (a.title.localeCompare(item.title) === 0) {
-                    if (item.dateCompleted.localeCompare('N/A') === 0) {
-                      return {...a, isDone: newValue, dateCompleted: getCurrentDate()};
-                    }
-                    return {...a, isDone: newValue, dateCompleted: 'N/A'};
-                  }
-                  return a;
-                }))
-              }
-            />
             <View pressHandler={editItem}>
-              <Text style={styles.itemText}>{item.title}</Text>
-              <Text style={styles.itemText}>{"Done:  " + item.isDone}</Text>
-              <Text style={styles.itemText}>{"Date due:  " + item.dateDue}</Text>
-              <Text style={styles.itemText}>{"Date completed:  " + item.dateCompleted}</Text>
+            <View style={styles.row}>
+            <View style={styles.checkbox}>
+            <CheckBox
+                  disabled={false}
+                  tintColors={{true: '#E57200', false: '#E57200'}}
+                  value={item.isDone}
+                  onValueChange={(newValue) => 
+                    setItems(items.map(a => {
+                      if (a.title.localeCompare(item.title) === 0) {
+                        if (item.dateCompleted.localeCompare('N/A') === 0) {
+                          return {...a, isDone: newValue, dateCompleted: getCurrentDate()};
+                        }
+                        return {...a, isDone: newValue, dateCompleted: 'N/A'};
+                      }
+                      return a;
+                    }))
+                  }
+                />
+            </View>
+                <Text style={styles.itemTitle}>
+                {item.title}
+              </Text>
+            </View>
+              <Text style={styles.itemText}>{"Due:  " + item.dateDue}</Text>
+            <Text style={styles.itemText}>{"Completed:  " + item.dateCompleted}</Text>
             </View>
           </TouchableOpacity>
         ))}
@@ -94,9 +99,21 @@ const styles = StyleSheet.create({
   itemText: {
     color: 'white'
   },
+  itemTitle: {
+    color: 'white',
+    fontSize: 20,
+    padding: 8
+  },
   list: {
     marginHorizontal: 4,
     marginBottom: 24
+  },
+  checkbox: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  row: {
+    flexDirection: 'row'
   }
 }); export default BucketList;
 

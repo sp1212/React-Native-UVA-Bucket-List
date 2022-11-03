@@ -47,21 +47,31 @@ const EditItem = ({ navigation, route }) => {
 
     return (
       <View style={styles.container}>
-        <Header />
-        <Text>{"Edit Item"}</Text>
-        <Text>{"Title"}</Text>
-        <TextInput
-          placeholder={"Item Title"}
-          value={title}
-          onChangeText={handleTitle} />
-        <Text>{"Due Date"}</Text>
-        <DatePicker
-          date={dateDue}
-          onDateChange={setDateDue}
-          mode='date' />
-        <Text>{completionStatus(isDone)}</Text>
-        <Button color={'#E57200'} title="Edit Item" onPress={editItem}></Button>
-        <Button color={'red'} title="Delete" onPress={deleteItem}></Button>
+        <Text style={styles.headerText}>{"Edit Item"}</Text>
+        <View>
+          <Text style={styles.dueText}>{"Item Title"}</Text>
+          <TextInput
+            style={styles.inputText}
+            placeholder={"Item Title"}
+            value={title}
+            onChangeText={handleTitle} />
+        </View>
+        <View>
+          <Text style={styles.dueText}>{"Due Date"}</Text>
+          <View style={styles.sideMargins}>
+            <DatePicker
+              date={dateDue}
+              onDateChange={setDateDue}
+              mode='date' />
+            </View>
+        </View>
+        <Text style={styles.dueText}>{completionStatus(isDone)}</Text>
+        <View style={styles.sideMargins}>
+          <Button color={'#E57200'} title="Edit Item" onPress={editItem}></Button>
+          </View>
+        <View style={styles.sideMargins}>
+          <Button color={'red'} title="Delete" onPress={deleteItem}></Button>
+        </View>
       </View>
     );
   }
@@ -69,7 +79,30 @@ const EditItem = ({ navigation, route }) => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff'
+      backgroundColor: '#fff',
+      justifyContent: 'space-evenly'
+    },
+    sideMargins: {
+      marginLeft: 20,
+      marginRight: 20,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignContent: 'center',
+    },
+    headerText: {
+      fontSize: 40,
+      color: 'black',
+      textAlign: 'center'
+    },
+    dueText: {
+      fontSize: 22,
+      color: 'black',
+      textAlign: 'center',
+      marginBottom: 6
+    },
+    inputText: {
+      fontSize: 18,
+      textAlign: 'center'
     }
   }); export default EditItem;
 

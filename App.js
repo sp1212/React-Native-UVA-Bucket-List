@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BucketList from './components/bucketlist';
 import AddItem from './components/additem';
 import EditItem from './components/edititem';
+import Header from './components/header';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,17 +17,17 @@ export default function App() {
         <Stack.Screen 
           name="BucketList"
           component={BucketList}
-          options={{ title: "List View", headerShown: false }}
+          options={{ title: "UVA Bucket List", headerTitleAlign: 'center', headerTintColor: 'white', headerStyle: { backgroundColor: '#E57200' } }}
         />
         <Stack.Screen 
           name="AddItem"
           component={AddItem}
-          options={{ title: "Add New Item" }}
+          options={{ title: "UVA Bucket List", headerTitleAlign: 'center', headerTintColor: 'white', headerStyle: { backgroundColor: '#E57200' } }}
         />
         <Stack.Screen 
           name="EditItem"
           component={EditItem}
-          options={{ title: "Edit Existing Item" }}
+          options={{ title: "UVA Bucket List", headerTitleAlign: 'center', headerTintColor: 'white', headerStyle: { backgroundColor: '#E57200' } }}
         />
       </Stack.Navigator>
     </NavigationContainer>
